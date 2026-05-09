@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Absolute Zero — Rolled Ice Cream · Northampton, MA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Fraunces:ital,wght@1,700;1,900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+:root{
+  --navy:     #18243f;
+  --navy-2:   #1f2e4f;
+  --ice:      #d8f0f8;
+  --ice-mid:  #a8d8ee;
+  --ice-deep: #5ab4d6;
+  --blue:     #3e9dbf;
+  --pink:     #ff7eb3;
+  --pink-soft:#ffe0ee;
+  --peach:    #ffb347;
+  --peach-soft:#fff0d6;
+  --mint:     #52c4a0;
+  --mint-soft:#d6f5eb;
+  --lavender: #b39ddb;
+  --lav-soft: #ede7f6;
+  --white:    #ffffff;
+  --cream:    #fffdf9;
+  --off:      #f5f8fb;
+  --warm-bg:  #fdf8f4;
+  --ink:      #1a2030;
+  --body:     #4a5568;
+  --muted:    #8a96a8;
+  --border:   #e2eaf0;
+  --sh:       0 2px 16px rgba(24,36,63,0.07);
+  --sh-md:    0 6px 30px rgba(24,36,63,0.1);
+  --sh-lg:    0 12px 50px rgba(24,36,63,0.13);
+}
+
+body{font-family:'Nunito',sans-serif;font-weight:400;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--off);}
+::-webkit-scrollbar-thumb{background:var(--ice-mid);border-radius:4px;}
+
+/* ══ NAV ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:var(--navy);height:64px;
+  padding:0 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 2px 20px rgba(24,36,63,0.18);
+}
+.logo{
+  font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700;
+  font-style:italic;color:var(--white);text-decoration:none;
+  display:flex;align-items:baseline;gap:0.1em;letter-spacing:0.01em;
+}
+.logo span{color:var(--pink);font-size:1.5rem;line-height:1;}
+
+.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none;}
+.nav-links a{
+  text-decoration:none;color:rgba(255,255,255,0.78);
+  font-size:0.84rem;font-weight:600;letter-spacing:0.01em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--ice-mid);}
+.nav-pill{
+  background:var(--pink) !important;color:var(--white) !important;
+  padding:0.5rem 1.4rem !important;border-radius:100px !important;
+  font-size:0.8rem !important;font-weight:700 !important;
+  transition:all 0.2s !important;
+  box-shadow:0 3px 12px rgba(255,126,179,0.4) !important;
+}
+.nav-pill:hover{background:#ff5fa0 !important;transform:translateY(-1px);box-shadow:0 5px 18px rgba(255,126,179,0.5) !important;}
+
+/* ══ HERO ══ */
+#hero{
+  min-height:100vh;background:var(--navy);
+  display:flex;align-items:center;
+  padding:7rem 2.5rem 7rem;
+  position:relative;overflow:hidden;
+}
+/* Colourful blobs */
+.blob{position:absolute;border-radius:50%;pointer-events:none;filter:blur(70px);}
+.blob-1{width:500px;height:500px;top:-15%;right:-5%;background:rgba(90,180,214,0.12);}
+.blob-2{width:350px;height:350px;bottom:5%;left:-5%;background:rgba(255,126,179,0.08);}
+.blob-3{width:300px;height:300px;top:30%;right:20%;background:rgba(82,196,160,0.06);}
+
+#hero::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;
+  height:110px;background:var(--cream);
+  clip-path:ellipse(52% 100% at 50% 100%);
+}
+
+.hero-inner{
+  max-width:1080px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1.15fr 0.85fr;
+  gap:4rem;align-items:center;position:relative;z-index:1;
+}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:rgba(255,126,179,0.15);
+  border:1.5px solid rgba(255,126,179,0.3);
+  border-radius:100px;padding:0.4rem 1.1rem;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.08em;
+  color:var(--pink);text-transform:uppercase;
+  margin-bottom:1.6rem;width:fit-content;
+  opacity:0;animation:pop 0.6s 0.1s ease forwards;
+}
+
+h1.hero-h1{
+  font-family:'Nunito',sans-serif;
+  font-size:clamp(3rem,6vw,5.8rem);
+  font-weight:900;line-height:1.05;
+  color:var(--white);
+  margin-bottom:0.4rem;
+  opacity:0;animation:pop 0.65s 0.22s ease forwards;
+}
+h1.hero-h1 .scoop{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:900;
+  color:var(--ice-mid);display:block;
+}
+
+.hero-tagline{
+  font-size:1.1rem;line-height:1.8;
+  color:rgba(255,255,255,0.5);
+  max-width:430px;margin-bottom:2.5rem;
+  opacity:0;animation:pop 0.65s 0.36s ease forwards;
+}
+
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:pop 0.65s 0.5s ease forwards;
+}
+
+.btn{
+  display:inline-block;text-decoration:none;
+  font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:800;
+  border-radius:100px;padding:0.85rem 2.1rem;
+  transition:all 0.22s;cursor:pointer;border:none;letter-spacing:0.01em;
+}
+.btn-pink{background:var(--pink);color:var(--white);box-shadow:0 4px 18px rgba(255,126,179,0.35);}
+.btn-pink:hover{background:#ff5fa0;transform:translateY(-2px);box-shadow:0 7px 24px rgba(255,126,179,0.45);}
+.btn-ghost{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.85);border:2px solid rgba(255,255,255,0.2);}
+.btn-ghost:hover{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.4);}
+.btn-navy{background:var(--navy);color:var(--white);box-shadow:var(--sh);}
+.btn-navy:hover{background:var(--navy-2);transform:translateY(-2px);}
+
+/* Hero info card */
+.hero-card{
+  background:rgba(255,255,255,0.06);
+  border:1.5px solid rgba(168,216,238,0.15);
+  border-radius:24px;padding:2rem;
+  backdrop-filter:blur(10px);
+  opacity:0;animation:pop 0.7s 0.52s ease forwards;
+}
+.hero-card-title{
+  font-size:0.72rem;font-weight:800;letter-spacing:0.12em;
+  color:var(--ice-mid);text-transform:uppercase;
+  margin-bottom:1.3rem;padding-bottom:0.9rem;
+  border-bottom:1px solid rgba(168,216,238,0.12);
+}
+.qi{display:flex;flex-direction:column;gap:1rem;}
+.qi-row{display:flex;align-items:flex-start;gap:0.9rem;}
+.qi-ico{
+  width:36px;height:36px;border-radius:12px;flex-shrink:0;
+  background:rgba(168,216,238,0.1);border:1px solid rgba(168,216,238,0.15);
+  display:flex;align-items:center;justify-content:center;font-size:0.9rem;
+}
+.qi-lbl{font-size:0.6rem;font-weight:700;letter-spacing:0.14em;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:0.15rem;}
+.qi-val{font-size:0.88rem;color:rgba(255,255,255,0.78);font-weight:600;}
+
+/* Floating scoops decoration */
+.scoop-deco{
+  position:absolute;font-size:3rem;
+  animation:wobble var(--dur,6s) ease-in-out infinite;
+  animation-delay:var(--del,0s);
+  opacity:0.18;pointer-events:none;user-select:none;
+}
+@keyframes wobble{0%,100%{transform:translateY(0) rotate(-5deg);}50%{transform:translateY(-14px) rotate(5deg);}}
+@keyframes pop{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* ══ SHARED ══ */
+.section{padding:6rem 2.5rem;}
+.inner{max-width:1080px;margin:0 auto;}
+
+.pill-label{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.7rem;font-weight:800;letter-spacing:0.14em;
+  text-transform:uppercase;margin-bottom:0.85rem;
+  border-radius:100px;padding:0.35rem 1rem;
+}
+.pill-blue{background:var(--ice);color:var(--blue);}
+.pill-pink{background:var(--pink-soft);color:#d63080;}
+.pill-mint{background:var(--mint-soft);color:#2a9d7c;}
+.pill-peach{background:var(--peach-soft);color:#c07000;}
+
+h2.heading{
+  font-family:'Nunito',sans-serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:900;line-height:1.1;color:var(--navy);
+}
+h2.heading em{font-family:'Fraunces',serif;font-style:italic;color:var(--pink);}
+h2.heading .mint{color:var(--mint);}
+h2.heading .peach{color:var(--peach);}
+h2.heading .blue{color:var(--ice-deep);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* Wavy dividers */
+.wave{display:block;width:100%;overflow:hidden;line-height:0;}
+.wave svg{display:block;}
+
+/* ══ ABOUT ══ */
+#about{background:var(--cream);position:relative;}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+
+.about-copy{font-size:0.97rem;line-height:1.95;color:var(--body);margin-top:1.2rem;font-weight:400;}
+.about-copy p+p{margin-top:1rem;}
+.about-copy strong{color:var(--navy);font-weight:700;}
+
+.feature-chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.75rem;}
+.fchip{
+  font-size:0.75rem;font-weight:700;padding:0.45rem 1.1rem;
+  border-radius:100px;border:none;
+  transition:transform 0.18s,box-shadow 0.18s;cursor:default;
+}
+.fchip:hover{transform:translateY(-2px);box-shadow:var(--sh);}
+.fc-blue{background:var(--ice);color:var(--blue);}
+.fc-pink{background:var(--pink-soft);color:#d63080;}
+.fc-mint{background:var(--mint-soft);color:#2a9d7c;}
+.fc-peach{background:var(--peach-soft);color:#b86e00;}
+.fc-lav{background:var(--lav-soft);color:#6a40c4;}
+
+/* Stats — fun bubble cards */
+.stat-bubbles{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;}
+.stat-bub{
+  border-radius:22px;padding:1.75rem 1.5rem;
+  display:flex;flex-direction:column;gap:0.2rem;
+  transition:transform 0.2s,box-shadow 0.2s;
+  cursor:default;
+}
+.stat-bub:hover{transform:translateY(-4px);box-shadow:var(--sh-md);}
+.sb-blue{background:var(--ice);border:2px solid rgba(90,180,214,0.25);}
+.sb-pink{background:var(--pink-soft);border:2px solid rgba(255,126,179,0.25);}
+.sb-mint{background:var(--mint-soft);border:2px solid rgba(82,196,160,0.25);}
+.sb-peach{background:var(--peach-soft);border:2px solid rgba(255,179,71,0.25);}
+.stat-num{
+  font-family:'Nunito',sans-serif;
+  font-size:2.6rem;font-weight:900;line-height:1;
+}
+.sb-blue .stat-num{color:var(--blue);}
+.sb-pink .stat-num{color:#d63080;}
+.sb-mint .stat-num{color:#2a9d7c;}
+.sb-peach .stat-num{color:#b86e00;}
+.stat-txt{font-size:0.77rem;font-weight:600;color:var(--body);}
+
+/* ══ MENU ══ */
+#menu{background:var(--warm-bg);}
+
+.menu-hd{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:2.5rem;}
+.fltrs{display:flex;gap:0.45rem;flex-wrap:wrap;}
+.fbtn{
+  font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;
+  padding:0.48rem 1.15rem;border-radius:100px;cursor:pointer;
+  border:2px solid var(--border);background:var(--white);color:var(--body);
+  transition:all 0.18s;
+}
+.fbtn:hover{border-color:var(--pink);color:var(--pink);}
+.fbtn.on{background:var(--navy);border-color:var(--navy);color:var(--white);}
+
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+
+.mcard{
+  background:var(--white);border-radius:22px;
+  border:2px solid var(--border);
+  overflow:hidden;cursor:pointer;
+  transition:all 0.22s;
+  box-shadow:var(--sh);
+  display:flex;flex-direction:column;
+}
+.mcard:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:var(--ice-mid);}
+
+.mcard-img{
+  width:100%;height:150px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3.5rem;flex-shrink:0;
+  background-size:cover;background-position:center;
+}
+.mcard-body{padding:1.4rem;flex:1;display:flex;flex-direction:column;}
+.mcat{
+  font-size:0.62rem;font-weight:800;letter-spacing:0.12em;
+  text-transform:uppercase;margin-bottom:0.45rem;
+}
+.cat-rolled{color:var(--blue);}
+.cat-specialty{color:#d63080;}
+.cat-boba{color:#b86e00;}
+.cat-vegan{color:#2a9d7c;}
+.cat-build{color:var(--lavender);}
+
+.mname{
+  font-size:1.2rem;font-weight:900;
+  color:var(--navy);margin-bottom:0.45rem;line-height:1.2;
+  transition:color 0.18s;
+}
+.mcard:hover .mname{color:var(--pink);}
+.mdesc{font-size:0.79rem;color:var(--body);line-height:1.65;flex:1;font-weight:400;}
+.mfoot{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:1rem;padding-top:0.85rem;border-top:2px solid var(--border);
+}
+.mprice{font-size:0.9rem;color:var(--navy);font-weight:800;}
+.mtap{font-size:0.65rem;color:var(--muted);font-weight:600;}
+
+.mcard.wide{
+  grid-column:span 2;flex-direction:row;
+  background:linear-gradient(135deg,var(--ice) 0%,#e8f5fc 100%);
+  border-color:rgba(90,180,214,0.3);
+}
+.mcard.wide:hover{border-color:var(--ice-deep);}
+.mcard.wide .mcard-img{width:160px;height:auto;min-height:140px;flex-shrink:0;}
+.mcard.wide .mcard-body{justify-content:center;}
+.mcard.wide .mname{font-size:1.45rem;}
+
+/* ══ REVIEWS ══ */
+#reviews{background:var(--cream);overflow:hidden;padding-bottom:0;}
+
+.marquee-wrap{
+  margin-top:2.5rem;overflow:hidden;padding-bottom:6rem;
+  -webkit-mask-image:linear-gradient(to right,transparent,black 6%,black 94%,transparent);
+  mask-image:linear-gradient(to right,transparent,black 6%,black 94%,transparent);
+}
+.marquee-track{
+  display:flex;gap:1.1rem;width:max-content;
+  animation:ticker 52s linear infinite;
+}
+.marquee-track:hover{animation-play-state:paused;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+.rcard{
+  width:295px;flex-shrink:0;
+  border-radius:20px;padding:1.6rem;
+  transition:all 0.22s;
+  border:2px solid transparent;
+}
+.rcard:hover{transform:translateY(-3px);box-shadow:var(--sh-md);}
+.rc-1{background:var(--pink-soft);border-color:rgba(255,126,179,0.2);}
+.rc-2{background:var(--ice);border-color:rgba(90,180,214,0.2);}
+.rc-3{background:var(--mint-soft);border-color:rgba(82,196,160,0.2);}
+.rc-4{background:var(--peach-soft);border-color:rgba(255,179,71,0.2);}
+.rc-5{background:var(--lav-soft);border-color:rgba(179,157,219,0.2);}
+
+.rcard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.85rem;}
+.rstars{font-size:0.8rem;letter-spacing:0.05em;color:var(--peach);}
+.rquote{font-family:'Fraunces',serif;font-style:italic;font-size:2rem;color:rgba(24,36,63,0.15);line-height:1;}
+.rtext{font-size:0.88rem;color:var(--navy);line-height:1.7;margin-bottom:0.85rem;font-weight:600;}
+.rwho{font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+
+/* ══ EXPERIENCE ══ */
+#experience{background:var(--warm-bg);}
+
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:2.5rem;}
+
+.steps{display:flex;flex-direction:column;gap:0;}
+.step{
+  display:flex;gap:1.25rem;padding:1.5rem 1rem 1.5rem 0;
+  border-bottom:2px solid var(--border);
+  border-radius:0;transition:all 0.2s;
+}
+.step:last-child{border-bottom:none;}
+.step:hover{background:var(--white);border-radius:16px;padding:1.5rem 1rem;margin:0 -1rem;box-shadow:var(--sh);}
+.snum{
+  font-family:'Nunito',sans-serif;font-weight:900;
+  font-size:1.8rem;color:var(--ice-mid);
+  min-width:2.8rem;line-height:1.1;flex-shrink:0;
+  transition:color 0.2s;
+}
+.step:hover .snum{color:var(--pink);}
+.stitle{font-size:0.95rem;font-weight:800;color:var(--navy);margin-bottom:0.3rem;}
+.sbody{font-size:0.8rem;color:var(--body);line-height:1.75;font-weight:400;}
+
+.exp-aside{position:sticky;top:7.5rem;}
+.temp-card{
+  background:var(--white);border:2px solid var(--border);
+  border-radius:24px;overflow:hidden;box-shadow:var(--sh-md);
+}
+.temp-top{
+  background:var(--navy);padding:2.75rem 2rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.temp-top::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 70% at 50% 110%,rgba(90,180,214,0.15),transparent);
+}
+.temp-top::after{
+  content:'🍦';position:absolute;bottom:-10px;right:20px;
+  font-size:4rem;opacity:0.12;
+}
+.temp-big{
+  font-family:'Nunito',sans-serif;font-size:5.5rem;font-weight:900;
+  color:var(--ice-mid);line-height:1;position:relative;
+}
+.temp-lbl{
+  font-size:0.65rem;font-weight:700;letter-spacing:0.2em;
+  color:rgba(255,255,255,0.38);text-transform:uppercase;
+  margin-top:0.5rem;position:relative;
+}
+.temp-cells{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.tcell{background:var(--white);padding:1.2rem 1.5rem;}
+.tcell-val{font-size:1.2rem;font-weight:800;color:var(--navy);margin-bottom:0.18rem;}
+.tcell-lbl{font-size:0.58rem;font-weight:700;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase;}
+
+/* ══ LOCATION ══ */
+#location{background:var(--cream);}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+
+.info-rows{display:flex;flex-direction:column;gap:1.5rem;margin-top:1.75rem;}
+.irow{display:flex;flex-direction:column;gap:0.3rem;}
+.ilbl{font-size:0.62rem;font-weight:800;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;}
+.ival{font-size:0.97rem;color:var(--navy);font-weight:600;}
+.ival a{color:var(--pink);text-decoration:none;}
+.ival a:hover{text-decoration:underline;}
+
+.hours-card{
+  border-radius:16px;overflow:hidden;
+  border:2px solid var(--border);margin-top:0.4rem;
+}
+.hrow{
+  display:flex;justify-content:space-between;
+  font-size:0.84rem;color:var(--body);font-weight:600;
+  padding:0.8rem 1.1rem;border-bottom:2px solid var(--border);
+  background:var(--white);
+}
+.hrow:last-child{border-bottom:none;}
+.hrow .d{color:var(--navy);font-weight:700;}
+.hrow.wknd{background:var(--pink-soft);}
+.hrow.wknd .d{color:#d63080;}
+
+.map-box{
+  border-radius:24px;overflow:hidden;border:2px solid var(--border);
+  aspect-ratio:1;position:relative;background:var(--ice);
+  box-shadow:var(--sh-md);
+}
+.map-grid-bg{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(24,36,63,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(24,36,63,0.05) 1px,transparent 1px);
+  background-size:30px 30px;
+  display:flex;align-items:center;justify-content:center;
+}
+.map-center{text-align:center;}
+.map-dot{
+  width:18px;height:18px;background:var(--pink);border-radius:50%;
+  margin:0 auto 0.85rem;
+  box-shadow:0 0 0 5px rgba(255,126,179,0.2),0 0 0 13px rgba(255,126,179,0.08);
+  animation:ripple 2.8s ease-in-out infinite;
+}
+@keyframes ripple{
+  0%,100%{box-shadow:0 0 0 5px rgba(255,126,179,0.2),0 0 0 13px rgba(255,126,179,0.08);}
+  50%{box-shadow:0 0 0 9px rgba(255,126,179,0.14),0 0 0 22px rgba(255,126,179,0.05);}
+}
+.map-addr{font-size:0.95rem;font-weight:800;color:var(--navy);margin-bottom:0.2rem;}
+.map-city{font-size:0.75rem;font-weight:600;color:var(--body);margin-bottom:1.3rem;}
+.map-cta{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-size:0.78rem;font-weight:700;color:var(--white);text-decoration:none;
+  background:var(--navy);padding:0.6rem 1.4rem;border-radius:100px;
+  transition:all 0.2s;box-shadow:var(--sh);
+}
+.map-cta:hover{background:var(--pink);box-shadow:0 4px 16px rgba(255,126,179,0.35);}
+
+/* ══ CTA ══ */
+#cta{
+  background:var(--navy);padding:8rem 2.5rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+#cta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 65% 55% at 50% 65%,rgba(255,126,179,0.07),transparent);
+  pointer-events:none;
+}
+#cta::after{
+  content:'';position:absolute;top:-1px;left:0;right:0;height:100px;
+  background:var(--cream);clip-path:ellipse(52% 100% at 50% 0%);
+}
+.cta-in{position:relative;z-index:1;max-width:640px;margin:0 auto;}
+.cta-emojis{font-size:2.5rem;margin-bottom:1rem;letter-spacing:0.1em;}
+.cta-h{
+  font-family:'Nunito',sans-serif;
+  font-size:clamp(2.8rem,7vw,5rem);font-weight:900;line-height:1.05;
+  color:var(--white);margin-bottom:1rem;
+}
+.cta-h em{font-family:'Fraunces',serif;font-style:italic;color:var(--pink);}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,0.45);margin-bottom:2.5rem;line-height:1.7;font-weight:600;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+/* ══ FOOTER ══ */
+footer{
+  background:var(--navy-2);border-top:1px solid rgba(255,255,255,0.06);
+  padding:1.75rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.flogo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;font-style:italic;color:var(--white);}
+.flogo span{color:var(--pink);}
+.fcopy{font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.3);}
+.fnav{display:flex;gap:1.5rem;}
+.fnav a{font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.18s;}
+.fnav a:hover{color:var(--ice-mid);}
+
+/* ══ SLIDE PANEL ══ */
+.overlay{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(24,36,63,0.5);
+  opacity:0;pointer-events:none;
+  transition:opacity 0.35s ease;
+  backdrop-filter:blur(4px);
+}
+.overlay.open{opacity:1;pointer-events:all;}
+
+.panel{
+  position:fixed;top:0;right:0;bottom:0;z-index:301;
+  width:min(490px,100vw);background:var(--white);
+  box-shadow:-10px 0 60px rgba(24,36,63,0.15);
+  transform:translateX(100%);
+  transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  display:flex;flex-direction:column;overflow:hidden;
+  border-radius:24px 0 0 24px;
+}
+.panel.open{transform:translateX(0);}
+
+.panel-img{
+  width:100%;height:220px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;flex-shrink:0;
+  background-size:cover;background-position:center;
+}
+.panel-letter{
+  font-family:'Nunito',sans-serif;font-size:6rem;
+  font-weight:900;color:rgba(255,255,255,0.25);user-select:none;line-height:1;
+}
+.panel-close{
+  position:absolute;top:1rem;right:1rem;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,0.2);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;color:var(--white);font-weight:700;
+  transition:background 0.18s;backdrop-filter:blur(4px);
+}
+.panel-close:hover{background:rgba(255,255,255,0.35);}
+
+.panel-body{padding:1.6rem 1.75rem 2.5rem;overflow-y:auto;flex:1;}
+.panel-cat{font-size:0.6rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--pink);margin-bottom:0.45rem;}
+.panel-name{font-family:'Nunito',sans-serif;font-size:1.85rem;font-weight:900;color:var(--navy);line-height:1.1;margin-bottom:0.4rem;}
+.panel-price{font-size:1rem;font-weight:800;color:var(--mint);margin-bottom:1.35rem;}
+
+.panel-tabs{
+  display:flex;margin-bottom:1.4rem;
+  background:var(--off);border-radius:14px;padding:4px;gap:3px;
+}
+.ptab{
+  flex:1;padding:0.55rem 0.4rem;border-radius:10px;
+  background:transparent;border:none;cursor:pointer;
+  font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;color:var(--muted);
+  transition:all 0.18s;
+}
+.ptab.on{background:var(--white);color:var(--navy);box-shadow:var(--sh);}
+.ptab:hover:not(.on){color:var(--navy);}
+
+.tab-content{display:none;}
+.tab-content.on{display:block;}
+
+.panel-desc{font-size:0.88rem;color:var(--body);line-height:1.85;margin-bottom:1.4rem;font-weight:400;}
+.panel-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.ptag{
+  font-size:0.68rem;font-weight:700;padding:0.32rem 0.9rem;border-radius:100px;
+  background:var(--pink-soft);color:#d63080;
+}
+
+.mx-group{margin-bottom:1.4rem;}
+.mx-group:last-child{margin-bottom:0;}
+.mx-lbl{
+  font-size:0.68rem;font-weight:800;letter-spacing:0.08em;
+  color:var(--navy);text-transform:uppercase;margin-bottom:0.5rem;
+  display:flex;align-items:center;gap:0.45rem;
+}
+.mx-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.mx-chips{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.mx-chip{
+  font-size:0.74rem;font-weight:600;padding:0.32rem 0.88rem;
+  border-radius:100px;border:2px solid var(--border);
+  color:var(--body);background:var(--off);
+  transition:all 0.15s;
+}
+.mx-chip:hover{border-color:var(--pink);background:var(--pink-soft);color:#d63080;}
+
+.panel-hr{height:2px;background:var(--border);margin:1.4rem 0;border-radius:1px;}
+.panel-cta{
+  display:block;width:100%;text-align:center;
+  background:var(--pink);color:var(--white);
+  font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:800;
+  padding:0.95rem;border-radius:100px;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:all 0.2s;letter-spacing:0.01em;
+  box-shadow:0 4px 18px rgba(255,126,179,0.35);
+}
+.panel-cta:hover{background:#ff5fa0;transform:translateY(-2px);box-shadow:0 7px 24px rgba(255,126,179,0.45);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:920px){
+  nav{padding:0 1.5rem;}
+  .nav-links li:not(:last-child){display:none;}
+  #hero{padding:6rem 1.5rem 5rem;}
+  .hero-inner{grid-template-columns:1fr;gap:2.5rem;}
+  .section{padding:4.5rem 1.5rem;}
+  .about-grid,.exp-grid,.loc-grid{grid-template-columns:1fr;gap:3rem;}
+  .menu-grid{grid-template-columns:1fr 1fr;}
+  .mcard.wide{grid-column:span 2;}
+  .exp-aside{position:static;}
+  .stat-bubbles{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;text-align:center;}
+}
+@media(max-width:580px){
+  .menu-grid{grid-template-columns:1fr;}
+  .mcard.wide{grid-column:span 1;flex-direction:column;}
+  .mcard.wide .mcard-img{width:100%;height:140px;}
+  .hero-card{display:none;}
+  .stat-bubbles{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="logo">Absolute <span>Zero</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#location" class="nav-pill">Visit Us 🍦</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="scoop-deco" style="top:12%;left:8%;--dur:7s;--del:0s;">🍦</div>
+  <div class="scoop-deco" style="top:20%;right:42%;--dur:9s;--del:-3s;font-size:2rem;">🧁</div>
+  <div class="scoop-deco" style="bottom:18%;right:8%;--dur:6s;--del:-1.5s;">🫧</div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">📍 Northampton, MA</div>
+      <h1 class="hero-h1">
+        Welcome to<br>
+        <span class="scoop">Absolute Zero.</span>
+      </h1>
+      <p class="hero-tagline">Rolled ice cream made live on a frozen pan. Dragon's breath, boba, and flavors you won't find anywhere else — all customized just for you.</p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn btn-pink">View Menu</a>
+        <a href="#location" class="btn btn-ghost">Find Us</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-title">Quick info</div>
+      <div class="qi">
+        <div class="qi-row"><div class="qi-ico">📍</div><div><div class="qi-lbl">Address</div><div class="qi-val">229 Main St, Northampton</div></div></div>
+        <div class="qi-row"><div class="qi-ico">🕐</div><div><div class="qi-lbl">Hours</div><div class="qi-val">Daily · closes 9 PM (10 PM Fri–Sat)</div></div></div>
+        <div class="qi-row"><div class="qi-ico">📞</div><div><div class="qi-lbl">Phone</div><div class="qi-val">(413) 727-8926</div></div></div>
+        <div class="qi-row"><div class="qi-ico">🌱</div><div><div class="qi-lbl">Vegan options</div><div class="qi-val">Yes — almond milk base</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="pill-label pill-pink">✨ The Experience</div>
+        <h2 class="heading">Not just ice cream.<br><em>A live show.</em></h2>
+        <div class="about-copy">
+          <p>Step inside and watch your dessert made from scratch — poured onto a <strong>−20°F pan</strong>, worked with spatulas, and rolled right in front of you. Every order made fresh. No pre-scooped tubs, no shortcuts.</p>
+          <p>From signature rolled ice cream to <strong>dragon's breath</strong>, boba drinks, and fully customizable combinations — this is a dessert experience worth talking about.</p>
+          <p>Our staff will walk you through every option patiently and enthusiastically, no matter how long it takes to find your perfect flavor.</p>
+        </div>
+        <div class="feature-chips">
+          <span class="fchip fc-blue">🍦 Rolled Ice Cream</span>
+          <span class="fchip fc-pink">🐉 Dragon's Breath</span>
+          <span class="fchip fc-peach">🧋 Boba Drinks</span>
+          <span class="fchip fc-mint">🌿 Vegan Options</span>
+          <span class="fchip fc-lav">✨ Custom Combos</span>
+          <span class="fchip fc-pink">⭐ Specialty Creations</span>
+        </div>
+      </div>
+      <div class="stat-bubbles reveal">
+        <div class="stat-bub sb-blue">
+          <div class="stat-num">50+</div>
+          <div class="stat-txt">Flavor combinations</div>
+        </div>
+        <div class="stat-bub sb-pink">
+          <div class="stat-num">−20°</div>
+          <div class="stat-txt">Ice pan temp (°F)</div>
+        </div>
+        <div class="stat-bub sb-mint">
+          <div class="stat-num">4.6★</div>
+          <div class="stat-txt">Google rating</div>
+        </div>
+        <div class="stat-bub sb-peach">
+          <div class="stat-num">∞</div>
+          <div class="stat-txt">Ways to build it</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;background:var(--cream)"><path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#fdf8f4"/></svg>
+
+<!-- MENU -->
+<section id="menu" class="section">
+  <div class="inner">
+    <div class="menu-hd reveal">
+      <div>
+        <div class="pill-label pill-blue">🍨 What We Make</div>
+        <h2 class="heading" style="margin-bottom:0">The <span class="blue">Menu</span></h2>
+      </div>
+      <div class="fltrs">
+        <button class="fbtn on" onclick="filt('all',this)">All</button>
+        <button class="fbtn" onclick="filt('rolled',this)">🍦 Flavors</button>
+        <button class="fbtn" onclick="filt('drink',this)">🧋 Drinks</button>
+        <button class="fbtn" onclick="filt('vegan',this)">🌿 Vegan</button>
+      </div>
+    </div>
+
+    <!-- Dragon's Breath Spotlight -->
+    <div class="reveal" style="margin-bottom:1.5rem;">
+      <div style="background:linear-gradient(135deg,#1a1a2e,#2d1b4e);border-radius:22px;padding:1.75rem 2rem;border:2px solid rgba(176,108,255,0.3);box-shadow:0 8px 32px rgba(176,108,255,0.15);">
+        <!-- Top row: emoji + price always visible -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem;gap:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div style="font-size:2.5rem;animation:wobble 4s ease-in-out infinite;line-height:1;">🐉</div>
+            <div>
+              <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#b06cff;margin-bottom:0.2rem;">✨ Fan Favorite</div>
+              <div style="font-family:'Nunito',sans-serif;font-size:1.5rem;font-weight:900;color:#fff;line-height:1.1;">Dragon's Breath</div>
+            </div>
+          </div>
+          <div style="text-align:center;flex-shrink:0;background:rgba(176,108,255,0.15);border-radius:14px;padding:0.6rem 1.1rem;">
+            <div style="font-family:'Nunito',sans-serif;font-size:2rem;font-weight:900;color:#b06cff;line-height:1;">$8</div>
+            <div style="font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;">per order</div>
+          </div>
+        </div>
+        <div style="font-size:0.84rem;color:rgba(255,255,255,0.52);line-height:1.65;">Cereal puffs that breathe real smoke when you eat them. A must-try experience — fun for all ages.</div>
+      </div>
+    </div>
+
+    <div class="menu-grid reveal" id="cards">
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Nut'n Fancy" style="background:linear-gradient(135deg,#8B6914,#C4A030)">🥜</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Nut'n Fancy</div><div class="mdesc">A classic nutty creation — simple, satisfying, and seriously good.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Tequila Slammer" style="background:linear-gradient(135deg,#c8a800,#f0d000)">🍋</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Tequila Slammer</div><div class="mdesc">A bold citrus-inspired creation with a fun kick of flavor.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Mint Chocolate Chip" style="background:linear-gradient(135deg,#2d8a60,#52c4a0)">🍃</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Mint Chocolate Chip</div><div class="mdesc">Cool mint base loaded with chocolate chips. A timeless classic, rolled fresh.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Don't Thai Me Down" style="background:linear-gradient(135deg,#c49a6c,#e8b870)">🧋</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Don't Thai Me Down</div><div class="mdesc">Thai iced tea, lychee, and condensed milk — creamy, aromatic, and unforgettable.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Taro" style="background:linear-gradient(135deg,#9b7fc4,#c4a0e8)">💜</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Taro</div><div class="mdesc">Sweet, earthy taro base rolled fresh — a fan favorite with a gorgeous purple hue.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Pumpkin Pie" style="background:linear-gradient(135deg,#c06000,#e88a30)">🎃</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Pumpkin Pie</div><div class="mdesc">Warm pumpkin spice flavor rolled into a creamy frozen dessert. Fall vibes year-round.</div><div class="mfoot"><span class="mprice">$8.99</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Pina Colada" style="background:linear-gradient(135deg,#e8d870,#f0c830)">🍍</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Piña Colada</div><div class="mdesc">Tropical pineapple and coconut rolled into summer in a cup.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Strawberry Shawty" style="background:linear-gradient(135deg,#e8637a,#f08fa0)">🍓</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Strawberry Shawty</div><div class="mdesc">Fresh strawberry base with compote, fruit, and whipped cream. Light and refreshing.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Green Super Giant" style="background:linear-gradient(135deg,#4a7c59,#6aaa7a)">🍵</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Green Super Giant</div><div class="mdesc">Matcha green tea base with fresh strawberry — earthy meets fruity in the best way.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-B-Day Delight" style="background:linear-gradient(135deg,#ff7eb3,#ffb3d4)">🎂</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">B-Day Delight</div><div class="mdesc">Birthday cake flavored base with rainbow sprinkles and all the fun. Celebrate every day.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Ferrero Rocher" style="background:linear-gradient(135deg,#8B5E3C,#C4874F)">🍫</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Ferrero Rocher</div><div class="mdesc">Chocolate hazelnut base, crushed Ferrero Rocher, Nutella drizzle, and gold flakes.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Peanut Butter Madness" style="background:linear-gradient(135deg,#b8860b,#d4a030)">🥜</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Peanut Butter Madness</div><div class="mdesc">Rich peanut butter base rolled with all the peanut butter goodness you can handle.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-S'more Galore" style="background:linear-gradient(135deg,#3b2012,#7a4a20)">🍫</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">S'more Galore</div><div class="mdesc">Chocolate, graham crackers, and toasted marshmallow — campfire vibes in every roll.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Miss Nilla Wafers" style="background:linear-gradient(135deg,#d4b870,#e8d090)">🍪</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Miss Nilla Wafers</div><div class="mdesc">Creamy vanilla base with Nilla Wafer crumbles folded in. Classic comfort, reimagined.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Death by Chocolate" style="background:linear-gradient(135deg,#1a0a00,#4a1a08)">🍫</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Death by Chocolate</div><div class="mdesc">Quad-chocolate base, brownie bites, chocolate drizzle, cocoa nibs, dark chocolate curls.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Sugar Shack" style="background:linear-gradient(135deg,#ff9a9e,#ffeaa7)">🍬</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Sugar Shack</div><div class="mdesc">Sweet, sugary, and totally indulgent — a dessert lover's dream in roll form.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Key Lime Pie" style="background:linear-gradient(135deg,#7ec850,#a8e070)">🍋</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Key Lime Pie</div><div class="mdesc">Tart and sweet key lime base with graham cracker crumbles. Tropical and refreshing.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Summer Melon" style="background:linear-gradient(135deg,#50c878,#a0e890)">🍈</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Summer Melon</div><div class="mdesc">Light and refreshing melon base — the taste of summer in every bite.</div><div class="mfoot"><span class="mprice">$8.99</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Cheesecake & Chill" style="background:linear-gradient(135deg,#f5e6c8,#e8d0a0)">🍰</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Cheesecake &amp; Chill</div><div class="mdesc">Creamy cheesecake base with graham cracker crumbles and a berry drizzle.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Cinnamon Roll" style="background:linear-gradient(135deg,#c47820,#e8a040)">🍩</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Cinnamon Roll</div><div class="mdesc">Warm cinnamon sugar base rolled fresh — tastes just like the bakery classic, frozen.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-King of the Fruit" style="background:linear-gradient(135deg,#e8a000,#f0c830)">👑</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">King of the Fruit</div><div class="mdesc">A tropical fruit explosion — mango, lychee, and more, royally combined.</div><div class="mfoot"><span class="mprice">$9.25</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Oh My Cake" style="background:linear-gradient(135deg,#d4508a,#e880b0)">🎂</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Oh My Cake</div><div class="mdesc">A dessert-on-dessert experience — cake-inspired base with all the sweet toppings.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Morning Latte" style="background:linear-gradient(135deg,#6b4226,#a0673c)">☕</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Morning Latte</div><div class="mdesc">Rich espresso and cream base — your morning coffee, reimagined as a dessert.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Monkey Business" style="background:linear-gradient(135deg,#c8a000,#e8c820)">🍌</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Monkey Business</div><div class="mdesc">Banana base with chocolate and peanut butter mix-ins — a playful, delicious combo.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Berry Blast" style="background:linear-gradient(135deg,#8020a0,#c060d0)">🫐</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Berry Blast</div><div class="mdesc">A medley of blueberry, raspberry, and strawberry — fresh, bright, and fruity.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Cotton Candy" style="background:linear-gradient(135deg,#f0a0d8,#d0b0f0)">🩷</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Cotton Candy</div><div class="mdesc">Sweet pastel cotton candy flavor that tastes just like the fairground favorite.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Mint Oreo" style="background:linear-gradient(135deg,#1a5c3a,#2d8a60)">🍪</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Mint Oreo</div><div class="mdesc">Cool mint base with crushed Oreos mixed in — a refreshing crowd-pleaser.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="rolled"><div class="mcard-img" id="ci-Oreo Secret" style="background:linear-gradient(135deg,#1a1a1a,#3a3a3a)">🍪</div><div class="mcard-body"><div class="mcat cat-rolled">Flavor</div><div class="mname">Oreo Secret</div><div class="mdesc">Oreo-loaded base rolled to perfection — cookies and cream taken to the next level.</div><div class="mfoot"><span class="mprice">$9.20</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <!-- Vegan -->
+      <div class="mcard" data-cat="vegan"><div class="mcard-img" id="ci-Almond Milk Base" style="background:linear-gradient(135deg,#b8a48a,#d4c3a8)">🌿</div><div class="mcard-body"><div class="mcat cat-vegan">Vegan</div><div class="mname">Almond Milk Base</div><div class="mdesc">Any flavor made fully plant-based with our almond milk base. Same craft, same taste.</div><div class="mfoot"><span class="mprice">Add $1</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <!-- Drinks -->
+      <div class="mcard" data-cat="drink"><div class="mcard-img" id="ci-Fruit Tea" style="background:linear-gradient(135deg,#e8637a,#f0a030)">🍓</div><div class="mcard-body"><div class="mcat cat-boba">Drinks</div><div class="mname">Fruit Tea</div><div class="mdesc">Refreshing fruit-infused tea, served cold and sweet.</div><div class="mfoot"><span class="mprice">$5.50</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="drink"><div class="mcard-img" id="ci-Cold Milk Tea" style="background:linear-gradient(135deg,#c49a6c,#a87850)">🧋</div><div class="mcard-body"><div class="mcat cat-boba">Drinks</div><div class="mname">Cold Milk Tea</div><div class="mdesc">Classic cold milk tea — smooth, creamy, and customizable.</div><div class="mfoot"><span class="mprice">$5.50</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="drink"><div class="mcard-img" id="ci-Hot Milk Tea" style="background:linear-gradient(135deg,#8a5a30,#b07840)">☕</div><div class="mcard-body"><div class="mcat cat-boba">Drinks</div><div class="mname">Hot Milk Tea</div><div class="mdesc">Warm and comforting milk tea — perfect even on a cold day.</div><div class="mfoot"><span class="mprice">$5.50</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="drink"><div class="mcard-img" id="ci-Mojito" style="background:linear-gradient(135deg,#2d8a60,#50c890)">🌿</div><div class="mcard-body"><div class="mcat cat-boba">Drinks</div><div class="mname">Mojito</div><div class="mdesc">Refreshing non-alcoholic mojito — mint, lime, and fizz done right.</div><div class="mfoot"><span class="mprice">$5.50</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="drink"><div class="mcard-img" id="ci-Sparkling Drink" style="background:linear-gradient(135deg,#5ab4d6,#90d8f0)">✨</div><div class="mcard-body"><div class="mcat cat-boba">Drinks</div><div class="mname">Sparkling Drink</div><div class="mdesc">Light and bubbly sparkling drink — the perfect refresher alongside your ice cream.</div><div class="mfoot"><span class="mprice">$5.50</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <div class="mcard" data-cat="drink"><div class="mcard-img" id="ci-Bottled Water" style="background:linear-gradient(135deg,#a0c8e0,#c8e8f8)">💧</div><div class="mcard-body"><div class="mcat cat-boba">Drinks</div><div class="mname">Bottled Water</div><div class="mdesc">Ice cold bottled water.</div><div class="mfoot"><span class="mprice">$1.50</span><span class="mtap">Tap to explore →</span></div></div></div>
+
+      <!-- Build Your Own -->
+      <div class="mcard wide" data-cat="all">
+        <div class="mcard-img" id="ci-Your Creation" style="background:linear-gradient(135deg,#5ab4d6,#3e9dbf)">✨</div>
+        <div class="mcard-body">
+          <div class="mcat cat-build">Build Your Own</div>
+          <div class="mname">Your Creation</div>
+          <div class="mdesc">Pick any base flavor, add your mix-ins, and top it off however you like. Thousands of combinations — you design it, we make it.</div>
+          <div class="mfoot"><span class="mprice">Priced by selection</span><span class="mtap">Tap to explore →</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;background:var(--warm-bg)"><path d="M0,20 C480,60 960,0 1440,40 L1440,0 L0,0 Z" fill="var(--cream)"/></svg>
+
+<!-- REVIEWS -->
+<section id="reviews" class="section" style="padding-bottom:0;background:var(--cream)">
+  <div class="inner">
+    <div class="reveal" style="max-width:460px">
+      <div class="pill-label pill-peach">💬 What People Say</div>
+      <h2 class="heading">People <em>love it</em> here.</h2>
+    </div>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="rcard rc-1"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Huge variety of combinations. My kids couldn't decide — we ended up getting something completely different each time.</p><div class="rwho">Sarah M. · Google</div></div>
+      <div class="rcard rc-2"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">The staff was so patient with our whole group. Walked us through every option with a smile. Super friendly vibe.</p><div class="rwho">Jake T. · Yelp</div></div>
+      <div class="rcard rc-3"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Never seen anything like this in Northampton. Watching them roll the ice cream is half the experience. Totally unique.</p><div class="rwho">Priya R. · Google</div></div>
+      <div class="rcard rc-4"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">As a vegan I'm always nervous about dessert spots. They were so accommodating. Best plant-based ice cream I've had.</p><div class="rwho">Chris L. · Yelp</div></div>
+      <div class="rcard rc-5"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Even in January. We went in the cold. Worth every frozen second. The dragon's breath alone made the whole trip.</p><div class="rwho">Marisol F. · Google</div></div>
+      <div class="rcard rc-1"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Death by Chocolate is not an exaggeration. I went back the next day. Absolutely no regrets at all.</p><div class="rwho">David K. · Google</div></div>
+      <div class="rcard rc-2"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Perfect date night spot. The vibe is unlike anything else around here. Memorable and delicious every time.</p><div class="rwho">Emma & Tom · Google</div></div>
+      <!-- duplicate -->
+      <div class="rcard rc-1"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Huge variety of combinations. My kids couldn't decide — we ended up getting something completely different each time.</p><div class="rwho">Sarah M. · Google</div></div>
+      <div class="rcard rc-2"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">The staff was so patient with our whole group. Walked us through every option with a smile. Super friendly vibe.</p><div class="rwho">Jake T. · Yelp</div></div>
+      <div class="rcard rc-3"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Never seen anything like this in Northampton. Watching them roll the ice cream is half the experience. Totally unique.</p><div class="rwho">Priya R. · Google</div></div>
+      <div class="rcard rc-4"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">As a vegan I'm always nervous about dessert spots. They were so accommodating. Best plant-based ice cream I've had.</p><div class="rwho">Chris L. · Yelp</div></div>
+      <div class="rcard rc-5"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Even in January. We went in the cold. Worth every frozen second. The dragon's breath alone made the whole trip.</p><div class="rwho">Marisol F. · Google</div></div>
+      <div class="rcard rc-1"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Death by Chocolate is not an exaggeration. I went back the next day. Absolutely no regrets at all.</p><div class="rwho">David K. · Google</div></div>
+      <div class="rcard rc-2"><div class="rcard-top"><div class="rstars">★★★★★</div><div class="rquote">"</div></div><p class="rtext">Perfect date night spot. The vibe is unlike anything else around here. Memorable and delicious every time.</p><div class="rwho">Emma & Tom · Google</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;background:var(--cream)"><path d="M0,30 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="var(--warm-bg)"/></svg>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section" style="background:var(--warm-bg)">
+  <div class="inner">
+    <div class="reveal" style="max-width:500px">
+      <div class="pill-label pill-mint">❄️ How It Works</div>
+      <h2 class="heading">Made <span class="mint">live,</span><br>in front of you.</h2>
+    </div>
+    <div class="exp-grid">
+      <div class="steps reveal">
+        <div class="step"><div class="snum">01</div><div><div class="stitle">Choose your base</div><div class="sbody">Classic cream, chocolate, matcha, strawberry, or our vegan almond milk base. Quality ingredients from the start.</div></div></div>
+        <div class="step"><div class="snum">02</div><div><div class="stitle">Watch it freeze</div><div class="sbody">Your mix is poured onto a −20°F pan and worked with spatulas in real time. Liquid becomes ice cream in seconds.</div></div></div>
+        <div class="step"><div class="snum">03</div><div><div class="stitle">The roll</div><div class="sbody">Thin sheets of frozen cream are rolled into tight cylinders and stood upright in a cup — every one made to order.</div></div></div>
+        <div class="step"><div class="snum">04</div><div><div class="stitle">Top it off</div><div class="sbody">Add sauces, fresh fruit, mochi, boba, pocky, or whipped cream — or let us make you a specialty creation.</div></div></div>
+        <div class="step"><div class="snum">05</div><div><div class="stitle">Worth the photo 📸</div><div class="sbody">Every cup is a work of art. And then you eat it. And then you come back.</div></div></div>
+      </div>
+      <div class="exp-aside reveal">
+        <div class="temp-card">
+          <div class="temp-top">
+            <div class="temp-big">−20°</div>
+            <div class="temp-lbl">Ice pan temperature · Fahrenheit</div>
+          </div>
+          <div class="temp-cells">
+            <div class="tcell"><div class="tcell-val">120s</div><div class="tcell-lbl">Freeze time</div></div>
+            <div class="tcell"><div class="tcell-val">−20°F</div><div class="tcell-lbl">Pan temp</div></div>
+            <div class="tcell"><div class="tcell-val">100%</div><div class="tcell-lbl">Made to order</div></div>
+            <div class="tcell"><div class="tcell-val">Live</div><div class="tcell-lbl">Every single time</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;background:var(--warm-bg)"><path d="M0,20 C480,60 960,0 1440,40 L1440,0 L0,0 Z" fill="var(--cream)"/></svg>
+
+<!-- CREPES -->
+<section id="crepes" class="section" style="background:var(--cream)">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="pill-label pill-peach">🥞 Now Serving</div>
+        <h2 class="heading">Fresh-made<br><em>Crepes.</em></h2>
+        <div class="about-copy">
+          <p>We've added hand-crafted crepes to the menu — made fresh to order, folded and filled with your choice of sweet ingredients. Thin, golden, and delicious.</p>
+          <p>Pair a crepe with your rolled ice cream for the ultimate dessert combo, or enjoy one on its own. Sweet fillings, fresh fruit, sauces, and whipped cream — all the good stuff.</p>
+          <p>Ask our staff about today's crepe options — new combinations are always in the works.</p>
+        </div>
+        <div class="feature-chips">
+          <span class="fchip fc-peach">🍓 Fresh Fruit</span>
+          <span class="fchip fc-pink">🍫 Chocolate</span>
+          <span class="fchip fc-blue">🍦 + Ice Cream</span>
+          <span class="fchip fc-mint">🍌 Banana</span>
+          <span class="fchip fc-lav">✨ Made to Order</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="stat-bubbles">
+          <div class="stat-bub sb-peach" style="grid-column:span 2;text-align:center;padding:2rem;">
+            <div style="font-size:4rem;margin-bottom:0.5rem;">🥞</div>
+            <div class="stat-num" style="font-size:1.8rem;">Fresh Crepes</div>
+            <div class="stat-txt" style="margin-top:0.4rem;">Hand-crafted to order — pair with any rolled ice cream</div>
+          </div>
+          <div class="stat-bub sb-pink">
+            <div class="stat-num">🍓</div>
+            <div class="stat-txt">Sweet fillings & fresh fruit</div>
+          </div>
+          <div class="stat-bub sb-mint">
+            <div class="stat-num">🍦</div>
+            <div class="stat-txt">Perfect with rolled ice cream</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;background:var(--cream)"><path d="M0,30 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="var(--off)"/></svg>
+
+<!-- LOCATION -->
+<section id="location" class="section" style="background:var(--off)">
+  <div class="inner">
+    <div class="loc-grid">
+      <div class="reveal">
+        <div class="pill-label pill-blue">📍 Find Us</div>
+        <h2 class="heading">Downtown<br><span class="blue">Northampton.</span></h2>
+        <div class="info-rows">
+          <div class="irow"><div class="ilbl">Address</div><div class="ival">229 Main St, Northampton, MA 01060</div></div>
+          <div class="irow"><div class="ilbl">Phone</div><div class="ival"><a href="tel:4137278926">(413) 727-8926</a></div></div>
+          <div class="irow">
+            <div class="ilbl">Hours</div>
+            <div class="hours-card">
+              <div class="hrow"><span class="d">Mon – Thu</span><span>12:00 PM – 9:00 PM</span></div>
+              <div class="hrow wknd"><span class="d">Fri – Sat</span><span>12:00 PM – 10:00 PM</span></div>
+              <div class="hrow"><span class="d">Sunday</span><span>12:00 PM – 9:00 PM</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="map-box">
+          <div class="map-grid-bg">
+            <div class="map-center">
+              <div class="map-dot"></div>
+              <div class="map-addr">229 Main St</div>
+              <div class="map-city">Northampton, MA · Downtown</div>
+              <a href="https://maps.google.com/?q=Absolute+Zero+229+Main+St+Northampton+MA+01060" class="map-cta" target="_blank">Open in Google Maps →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-in reveal">
+    <div class="cta-emojis">🍦 🧁 🧋</div>
+    <h2 class="cta-h">Come try it<br><em>today.</em></h2>
+    <p class="cta-sub">Bring friends. Try something new. Make it an experience worth remembering.</p>
+    <div class="cta-btns">
+      <a href="tel:4137278926" class="btn btn-pink">Call Ahead</a>
+      <a href="https://maps.google.com/?q=Absolute+Zero+229+Main+St+Northampton+MA+01060" class="btn btn-ghost" target="_blank">Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">Absolute <span>Zero</span></div>
+  <div class="fcopy">229 Main St, Northampton, MA · (413) 727-8926</div>
+  <nav class="fnav">
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#location">Find Us</a>
+  </nav>
+</footer>
+
+<!-- SLIDE PANEL -->
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+<div class="panel" id="panel">
+  <div class="panel-img" id="panelImg">
+    <div class="panel-letter" id="panelLetter"></div>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body">
+    <div class="panel-cat" id="panelCat"></div>
+    <div class="panel-name" id="panelName"></div>
+    <div class="panel-price" id="panelPrice"></div>
+    <div class="panel-tabs" id="panelTabs">
+      <button class="ptab on" onclick="switchTab('details',this)">Details</button>
+      <button class="ptab" id="tabMixins" onclick="switchTab('mixins',this)">Mix-ins</button>
+      <button class="ptab" id="tabToppings" onclick="switchTab('toppings',this)">Toppings</button>
+      <button class="ptab" id="tabCustomize" onclick="switchTab('customize',this)">Customize</button>
+    </div>
+    <div class="tab-content on" id="tab-details">
+      <div class="panel-desc" id="panelDesc"></div>
+      <div class="panel-tags" id="panelTags"></div>
+    </div>
+    <div class="tab-content" id="tab-mixins">
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#e8637a"></span>Fruits</div><div class="mx-chips"><span class="mx-chip">🍓 Strawberry</span><span class="mx-chip">🫐 Raspberry</span><span class="mx-chip">🫐 Blueberry</span><span class="mx-chip">🍌 Banana</span><span class="mx-chip">🥭 Mango</span><span class="mx-chip">🍈 Lychee</span></div></div>
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#c4874f"></span>Cookies & Sweets</div><div class="mx-chips"><span class="mx-chip">Oreo</span><span class="mx-chip">Graham Crackers</span><span class="mx-chip">Andes Mint</span><span class="mx-chip">Brownie</span><span class="mx-chip">Pound Cake</span><span class="mx-chip">Cookie Dough Bites</span><span class="mx-chip">Toasted Marshmallow</span></div></div>
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#6aaa7a"></span>Flavors & Spreads</div><div class="mx-chips"><span class="mx-chip">🍵 Matcha</span><span class="mx-chip">🧋 Thai Iced Tea</span><span class="mx-chip">Nutella</span><span class="mx-chip">Peanut Butter</span><span class="mx-chip">Cinnamon & Sugar</span></div></div>
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#6bbcd9"></span>Liquid Mix-ins</div><div class="mx-chips"><span class="mx-chip">Condensed Milk</span><span class="mx-chip">Chocolate Sauce</span><span class="mx-chip">Mango Sauce</span><span class="mx-chip">Raspberry Sauce</span></div></div>
+    </div>
+    <div class="tab-content" id="tab-toppings">
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#e8637a"></span>Fresh Fruit</div><div class="mx-chips"><span class="mx-chip">🫐 Blueberries</span><span class="mx-chip">🍓 Strawberries</span></div></div>
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#c4a0e8"></span>Dry Toppings</div><div class="mx-chips"><span class="mx-chip">Slivered Almonds</span><span class="mx-chip">Coconut Flakes</span><span class="mx-chip">🌈 Rainbow Sprinkles</span></div></div>
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#c4874f"></span>Sweets & Extras</div><div class="mx-chips"><span class="mx-chip">Whipped Cream</span><span class="mx-chip">Pocky Sticks</span><span class="mx-chip">Mochi</span><span class="mx-chip">Nilla Wafers</span><span class="mx-chip">Pretzels</span></div></div>
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#6bbcd9"></span>Sauces</div><div class="mx-chips"><span class="mx-chip">🍮 Caramel Sauce</span><span class="mx-chip">🍫 Chocolate Sauce</span></div></div>
+    </div>
+    <div class="tab-content" id="tab-customize">
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#f5c842"></span>Sweetness Level</div><div class="mx-chips"><span class="mx-chip">0% Unsweetened</span><span class="mx-chip">25% Light</span><span class="mx-chip">50% Half Sweet</span><span class="mx-chip">75% Less Sweet</span><span class="mx-chip">100% Full Sweet</span></div></div>
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#6bbcd9"></span>Ice Level</div><div class="mx-chips"><span class="mx-chip">No ice</span><span class="mx-chip">Less ice</span><span class="mx-chip">Regular ice</span><span class="mx-chip">Extra ice</span></div></div>
+      <div class="mx-group"><div class="mx-lbl"><span class="mx-dot" style="background:#c4874f"></span>Add-ins</div><div class="mx-chips"><span class="mx-chip">Tapioca Boba</span><span class="mx-chip">Lychee Jelly</span><span class="mx-chip">Lychee Popping Pearls</span><span class="mx-chip">Mango Popping Pearls</span></div></div>
+    </div>
+    <div class="panel-hr"></div>
+    <a href="tel:4137278926" class="panel-cta">🍦 Call to Order · (413) 727-8926</a>
+  </div>
+</div>
+
+<script>
+const items={
+  'Classic Roll':{cat:'Rolled Ice Cream',type:'icecream',img:'images/classic-roll.jpg',price:'From $7',desc:'Your choice of base flavor rolled fresh on our −20°F pan. Pick your mix-ins and we\'ll roll it up right in front of you — finished with your choice of toppings, sauces, and garnishes. No two are ever the same.',tags:['Made to order','Customizable','Choose your toppings'],color:['#6bbcd9','#4aa8cc']},
+  'Ferrero Rocher':{cat:'Specialty Creation',type:'icecream',img:'images/ferrero-rocher.jpg',price:'$10',desc:'A fan favorite. Chocolate hazelnut base rolled with crushed Ferrero Rocher pieces, finished with a generous Nutella drizzle and gold flakes on top. Rich, indulgent, and worth every bite.',tags:['Chocolate','Hazelnut','Specialty'],color:['#8B5E3C','#C4874F']},
+  'Death by Chocolate':{cat:'Specialty Creation',type:'icecream',img:'images/death-by-chocolate.jpg',price:'$10',desc:'Not for the faint-hearted. Quad-chocolate base with brownie bites mixed in, rolled and topped with chocolate drizzle, cocoa nibs, and dark chocolate curls. The most chocolate we can fit in one cup.',tags:['Chocolate lovers','Specialty','Decadent'],color:['#3b2012','#6b3a1f']},
+  'Strawberry Fields':{cat:'Rolled Ice Cream',type:'icecream',img:'images/strawberry-fields.jpg',price:'$8',desc:'Fresh and fruity. A strawberry cream base rolled to perfection, topped with house-made strawberry compote, fresh sliced strawberries, and a cloud of whipped cream. Light and refreshing.',tags:['Fruity','Fresh','Whipped cream'],color:['#e8637a','#f08fa0']},
+  'Matcha Dream':{cat:'Specialty Creation',type:'icecream',img:'images/matcha-dream.jpg',price:'$9.50',desc:'For the matcha lovers. Ceremonial-grade matcha base rolled and topped with sweet red bean paste, pillowy mochi bites, and a final dusting of matcha powder. Earthy, sweet, and beautiful.',tags:['Matcha','Mochi','Red bean'],color:['#4a7c59','#6aaa7a']},
+  'Almond Milk Base':{cat:'Vegan',type:'info',img:'images/almond-milk-base.jpg',price:'Add $1 to any roll',desc:'Every rolled ice cream on our menu can be made with our house almond milk base — totally plant-based, same creamy texture, same great taste. Just let us know when you order.',tags:['Vegan','Plant-based','Dairy-free'],color:['#b8a48a','#d4c3a8']},
+  'Classic Milk Tea':{cat:'Boba & Drinks',type:'drink',img:'images/classic-milk-tea.jpg',price:'$6',desc:'Our take on the Taiwanese classic. Strong brewed black tea blended with creamy milk and loaded with chewy tapioca pearls. Customize your sweetness level and ice — we\'ll make it just how you like it.',tags:['Boba','Black tea','Customizable'],color:['#c49a6c','#a87850']},
+  'Taro Latte':{cat:'Boba & Drinks',type:'drink',img:'images/taro-latte.jpg',price:'$6.50',desc:'Creamy, slightly sweet, and that gorgeous purple color. Our taro milk latte is blended smooth and served with your choice of tapioca boba, lychee jelly, or lychee popping pearls.',tags:['Taro','Boba','Lychee pearls'],color:['#9b7fc4','#c4a0e8']},
+  'Your Creation':{cat:'Build Your Own',type:'icecream',img:'images/your-creation.jpg',price:'Priced by selection',desc:'Build your own from scratch. Choose your base, pick your mix-ins, decide on your rolls, then load it up with whatever toppings you want. Thousands of combinations — you design it, we make it.',tags:['Fully custom','Any base','Any toppings'],color:['#5ab4d6','#3e9dbf']},
+};
+
+function switchTab(tab,btn){
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('tab-'+tab).classList.add('on');
+}
+
+function openPanel(name){
+  const item=items[name];if(!item)return;
+  const isDrink=item.type==='drink',isIce=item.type==='icecream';
+  document.getElementById('tabMixins').style.display=isIce?'':'none';
+  document.getElementById('tabToppings').style.display=isIce?'':'none';
+  document.getElementById('tabCustomize').style.display=isDrink?'':'none';
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('on'));
+  document.querySelector('.ptab').classList.add('on');
+  document.getElementById('tab-details').classList.add('on');
+  document.getElementById('panelCat').textContent=item.cat;
+  document.getElementById('panelName').textContent=name;
+  document.getElementById('panelPrice').textContent=item.price;
+  document.getElementById('panelDesc').textContent=item.desc;
+  document.getElementById('panelTags').innerHTML=item.tags.map(t=>`<span class="ptag">${t}</span>`).join('');
+  const pi=document.getElementById('panelImg'),pl=document.getElementById('panelLetter');
+  pl.textContent=name.charAt(0);
+  pi.style.background=`linear-gradient(135deg,${item.color[0]},${item.color[1]})`;
+  if(item.img){const p=new Image();p.onload=()=>{pi.style.backgroundImage=`url('${item.img}')`;pi.style.backgroundSize='cover';pi.style.backgroundPosition='center';pl.textContent='';};p.src=item.img;}
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('panel').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closePanel(){
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('panel').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel();});
+document.querySelectorAll('#cards .mcard').forEach(card=>{
+  card.addEventListener('click',()=>openPanel(card.querySelector('.mname').textContent.trim()));
+});
+
+Object.entries(items).forEach(([name,item])=>{
+  if(!item.img)return;
+  const el=document.getElementById(`ci-${name}`);if(!el)return;
+  const p=new Image();
+  p.onload=()=>{el.style.backgroundImage=`url('${item.img}')`;el.style.backgroundSize='cover';el.style.backgroundPosition='center';el.textContent='';};
+  p.src=item.img;
+});
+
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*85);io.unobserve(e.target);}});
+},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+function filt(cat,btn){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('#cards .mcard').forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat===cat||c.dataset.cat==='all')?'':'none';
+  });
+}
+</script>
+</body>
+</html>
